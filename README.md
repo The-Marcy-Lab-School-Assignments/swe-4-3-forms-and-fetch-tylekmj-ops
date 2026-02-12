@@ -61,7 +61,7 @@ git checkout -b draft   # switch to the draft branch before starting
 
 npm create vite@latest  # create a Vite project
 npm i                   # install dependencies
-npm run dev             # start Vite dev server
+npm run dev             # start Vite dev rafx
 
 git add -A              # add a changed file to the staging area
 git commit -m 'message' # create a commit with the changes
@@ -144,10 +144,10 @@ You will:
 
 #### Step 1A: Write the HTML (4 points)
 In `index.html`, do the following:
-- [ ] Create an empty `p#error` element (a paragraph with the id "error") in the HTML body to display an **error** message.
-- [ ] Create an empty `p#success` element in the HTML body to display a **success** message.
-- [ ] Create a `button#discover-button` element in the HTML body that lets the user click on the button to "encounter" a new random Pokémon. Add appropriate text content.
-- [ ] Create a `ul#discovered-list` element in the HTML body where you will display the random Pokémon's data.
+- [x] Create an empty `p#error` element (a paragraph with the id "error") in the HTML body to display an **error** message.
+- [x] Create an empty `p#success` element in the HTML body to display a **success** message.
+- [x] Create a `button#discover-button` element in the HTML body that lets the user click on the button to "encounter" a new random Pokémon. Add appropriate text content.
+- [x] Create a `ul#discovered-list` element in the HTML body where you will display the random Pokémon's data.
 
 You may, but are not required to, add additional structure and headings.
 
@@ -157,9 +157,9 @@ You may, but are not required to, add additional structure and headings.
 In `src/fetch-helpers.js`, do the following:
 
 - [ ] Create an async function called `getRandomPokemon()`. It should:
-  - [ ] Pick a random ID between 1 and 150 (inclusive)
-  - [ ] Fetch the Pokémon data using the API endpoint `https://pokeapi.co/api/v2/pokemon/{id}`
-  - [ ] Look through the data and create an object `pokemonObj` with this structure:
+  - [x] Pick a random ID between 1 and 150 (inclusive)
+  - [X] Fetch the Pokémon data using the API endpoint `https://pokeapi.co/api/v2/pokemon/{id}`
+  - [ ] Look through the data and create an object `pokemonObj` with this structure:   
       ```js
       { 
          name: "bulbasaur", 

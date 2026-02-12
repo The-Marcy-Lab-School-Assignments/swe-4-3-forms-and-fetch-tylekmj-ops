@@ -36,7 +36,7 @@ const data = await response.json();
 ```
 
 **Your Answer:**
-
+We check response.ok first because it checks if there's an error that isnt caused by your code such as a server error or an error caused by lack of internet. Catch would normally miss these errors because catch only catches errors that you make in your code.
 
 
 ## Question 4: Async/Await Conversion
