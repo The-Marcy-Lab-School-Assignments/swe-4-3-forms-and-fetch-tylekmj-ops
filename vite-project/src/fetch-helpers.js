@@ -1,52 +1,42 @@
-// export const getRandomPokemon = async () => {
-//     let randomID = Math.round(Math.random() * 150) + 1
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeajrzjn";
 
-//   fetch(`https://pokeapi.co/api/v2/pokemon/${randomID}`)
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw Error(`Fetch failed. ${response.status} ${response.statusText}`);
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       console.log(data);
-//     })
-//     .catch((error) => {
-//       console.error(error.message);
-//     });
-// }
-
-export const getRandomPokemon = async () => { 
+export async function getRandomPokemon() {
   try {
-    let randomID = Math.round(Math.random() * 150) + 1
+    const id = Math.floor(Math.random() * 150) + 1;
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    if (!response.ok) throw new Error(`Fetch failed. Status: ${response.status}`);
 
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomID}`);
-  
-    if (!response.ok) {
-      throw Error(`Fetch failed. ${response.status} ${response.statusText}`);
-    }
     const data = await response.json();
-    const types = ``
-    console.log(data)
-    data.types.forEach((obj) => (types += obj.type.name))
-    console.log(types)
 
-    // const pokemons = data.map((pokemon) => ({
-    //   id: user.id,
-    //   name: user.name,
-    //   username: user.username,
-    //   email: user.email
-    // }));
-
-    let pokeObj = {
+    const pokemonObj = {
       name: data.name,
-      types: data.types,
-      sprite: data.sprites.front_default
-    }
-    
-    console.log(pokeObj)
+      types: data.types.map((t) => t.type.name).join(", "),
+      sprite: data.sprites.front_default,
+    };
+
+    return { data: pokemonObj, error: null };
   } catch (error) {
-    console.log("Error caught! " + error.message);
-    return { data: null, error: error };
+    return { data: null, error };
   }
-};
+}
+
+export async function postDiscoveredPokemon(formData) {
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) throw new Error(`Fetch failed. Status: ${response.status}`);
+
+    const responseData = await response.json();
+
+    return { data: responseData, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
+}
